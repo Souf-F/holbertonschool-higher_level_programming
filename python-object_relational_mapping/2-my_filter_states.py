@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module that lists all states with a name matching user input from database hbtn_0e_0_usa
+Module that lists states matching user input from hbtn_0e_0_usa database
 """
 import MySQLdb
 import sys
@@ -22,7 +22,8 @@ if __name__ == "__main__":
 
     cur = conn.cursor()
 
-    sql = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(state_name)
+    sql = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"
+    sql = sql.format(state_name)
     cur.execute(sql)
 
     query_rows = cur.fetchall()
