@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-Module that connects to a MySQL database and lists
-with names starting with uppercase N
+Module that lists all states with names starting with N from hbtn_0e_0_usa
 """
 import MySQLdb
 import sys
