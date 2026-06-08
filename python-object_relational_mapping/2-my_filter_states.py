@@ -1,32 +1,35 @@
 #!/usr/bin/python3
-"""
-Module that lists states matching user input from hbtn_0e_0_usa database
-"""
-import MySQLdb
+"""Module getting all states and filter by user input"""
+
 import sys
+import MySQLdb
 
 if __name__ == "__main__":
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    state_name = sys.argv[4]
+    
+    mysql_username = sys.argv[1]
+    mysql_password = sys.argv[2]
+    database_name = sys.argv[3]
+    state_name_searched = sys.argv[4]
 
-    conn = MySQLdb.connect(
+    db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=username,
-        passwd=password,
-        db=database,
-        charset="utf8"
+        user=mysql_username,
+        passwd=mysql_password,
+        db=database_name
     )
-
-    cur = conn.cursor()
-
-    sql = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"
-    cur.execute(sql.format(state_name))
-
-    for row in cur.fetchall():
-        print(row)
-
-    cur.close()
-    conn.close()
+    
+    cursor = db.cursor()  # je créer le stylo
+    cursor.execute(
+        """SELECT *
+        FROM states
+        WHERE BINARY name = '{}'
+        ORDER BY id ASC""".format(state_name_searched)
+    )
+    
+    states_list = cursor.fetchall()
+    for state in states_list:
+        print(state)
+        
+    cursor.close()
+    db.close()
