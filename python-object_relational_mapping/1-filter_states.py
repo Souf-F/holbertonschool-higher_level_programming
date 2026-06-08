@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Lists all states with names starting with N from the database hbtn_0e_0_usa
+Module that connects to a MySQL database and lists all states
+with names starting with uppercase N, sorted by id in ascending order
 """
 import MySQLdb
 import sys
