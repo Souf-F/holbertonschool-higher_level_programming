@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module that safely lists all states with a name matching user input from database hbtn_0e_0_usa
+Module that safely lists all states with a name matching
 """
 import MySQLdb
 import sys
