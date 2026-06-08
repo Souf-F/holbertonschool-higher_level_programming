@@ -1,9 +1,11 @@
 #!/usr/bin/python3
-"""Module getting all states and filter by user input safely"""
+"""Module getting all states and filter by user input"""
+
 import sys
 import MySQLdb
 
 if __name__ == "__main__":
+	
     mysql_username = sys.argv[1]
     mysql_password = sys.argv[2]
     database_name = sys.argv[3]
@@ -16,15 +18,18 @@ if __name__ == "__main__":
         passwd=mysql_password,
         db=database_name
     )
-
-    cursor = db.cursor()
+    
+    cursor = db.cursor()  # je créer le stylo
     cursor.execute(
-        "SELECT * FROM states WHERE BINARY name = %s ORDER BY id ASC",
-        (state_name_searched,)
+        """SELECT *
+        FROM states
+        WHERE BINARY name = '{}'
+        ORDER BY id ASC""".format(state_name_searched)
     )
-
-    for state in cursor.fetchall():
+    
+    states_list = cursor.fetchall()
+    for state in states_list:
         print(state)
-
+        
     cursor.close()
     db.close()
