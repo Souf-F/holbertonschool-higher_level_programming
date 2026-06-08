@@ -22,13 +22,10 @@ if __name__ == "__main__":
 
     cur = conn.cursor()
 
-    sql = "SELECT * FROM states WHERE BINARY name = '{}' ORDER BY id ASC"
-    sql = sql.format(state_name)
-    cur.execute(sql)
+    sql = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"
+    cur.execute(sql.format(state_name))
 
-    query_rows = cur.fetchall()
-
-    for row in query_rows:
+    for row in cur.fetchall():
         print(row)
 
     cur.close()
