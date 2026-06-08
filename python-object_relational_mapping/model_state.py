@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Module defining the State class mapped to the states table."""
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
