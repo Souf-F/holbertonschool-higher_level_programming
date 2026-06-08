@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-
 """
-Module that lists all states from the database hbtn_0e_0_usa
+Lists all states with names starting with N from the database hbtn_0e_0_usa
 """
 import MySQLdb
 import sys
