@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Module that lists states matching user input from hbtn_0e_0_usa database
+Module that connects to a MySQL database and lists
+with names starting with uppercase N
 """
 import MySQLdb
 import sys
@@ -9,7 +10,6 @@ if __name__ == "__main__":
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
-    state_name = sys.argv[4]
 
     conn = MySQLdb.connect(
         host="localhost",
@@ -22,9 +22,7 @@ if __name__ == "__main__":
 
     cur = conn.cursor()
 
-    sql = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"
-    sql = sql.format(state_name)
-    cur.execute(sql)
+    cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
 
     query_rows = cur.fetchall()
 
