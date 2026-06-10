@@ -30,11 +30,10 @@ class SimpleAPIRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(data).encode())
 
         elif self.path == '/status':
-            data = {"status": "OK"}
             self.send_response(200)
-            self.send_header('Content-type', 'application/json')
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(json.dumps(data).encode())
+            self.wfile.write(b"OK")
 
         elif self.path == '/info':
             data = {
@@ -47,11 +46,10 @@ class SimpleAPIRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(data).encode())
 
         else:
-            data = {"error": "Endpoint not found"}
             self.send_response(404)
-            self.send_header('Content-type', 'application/json')
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(json.dumps(data).encode())
+            self.wfile.write(b"Endpoint not found")
 
     def log_message(self, format, *args):
         """Suppress default logging."""
