@@ -1,4 +1,11 @@
 #!/usr/bin/python3
+"""
+Module task_04_db
+
+A Flask application that reads product data from JSON, CSV, or a
+SQLite database, depending on a 'source' query parameter, with
+optional filtering by 'id'.
+"""
 import csv
 import json
 import sqlite3
@@ -8,11 +15,13 @@ app = Flask(__name__)
 
 
 def read_json(filename='products.json'):
+    """Read and return a list of products from a JSON file."""
     with open(filename, 'r') as f:
         return json.load(f)
 
 
 def read_csv(filename='products.csv'):
+    """Read and return a list of products from a CSV file."""
     products = []
     with open(filename, 'r', newline='') as f:
         reader = csv.DictReader(f)
@@ -27,6 +36,7 @@ def read_csv(filename='products.csv'):
 
 
 def read_sql(filename='products.db'):
+    """Read and return a list of products from the SQLite database."""
     conn = sqlite3.connect(filename)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -47,21 +57,25 @@ def read_sql(filename='products.db'):
 
 @app.route('/')
 def home():
+    """Render the home page."""
     return render_template('index.html')
 
 
 @app.route('/about')
 def about():
+    """Render the about page."""
     return render_template('about.html')
 
 
 @app.route('/contact')
 def contact():
+    """Render the contact page."""
     return render_template('contact.html')
 
 
 @app.route('/items')
 def items():
+    """Read the list of items from items.json and render them."""
     try:
         with open('items.json', 'r') as f:
             data = json.load(f)
@@ -74,7 +88,7 @@ def items():
 
 @app.route('/products')
 def products():
-   uery parameter. Optionally filter by 'id'.
+    """Display products from JSON, CSV, or SQLite based on source."""
     source = request.args.get('source')
     product_id = request.args.get('id')
 
